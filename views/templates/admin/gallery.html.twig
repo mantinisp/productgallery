@@ -1,0 +1,88 @@
+<div class="product-gallery">
+    <div class="product-gallery__add-new">
+        <div class="product-gallery__field">
+            <input
+                class="form-control product-gallery__input"
+                type="text"
+                id="product-gallery-create-input"
+                name="product-gallery-name"
+                placeholder="Enter gallery name"
+                value=""
+            />
+        </div>
+        <div>
+            <button
+                class="btn btn-primary save uppercase ml-3"
+                id="product-gallery-create-new-gallery"
+                url-create-gallery="{{ path('admin_product_gallery_create', { 'id_product': id_product }) }}"
+            >
+                {{ 'Create new gallery'|trans({}, 'Modules.ProductGallery.Admin') }}
+            </button>
+        </div>
+    </div>
+    {% if galleries|length %}
+        {% for gallery in galleries %}
+            <div
+                class="product-gallery__name"
+                data-gallery-id="{{ gallery.id_image_gallery }}"
+                data-gallery-counter="{{ gallery.images|length }}"
+            >
+                {{ gallery.gallery_name }} ({{ gallery.images|length }})
+                <div class="product-gallery__delete">
+                    <button
+                        class="delete-product-gallery btn btn-sm btn-danger save uppercase ml-3"
+                        data-gallery-id="{{ gallery.id_image_gallery }}"
+                        url-delete-gallery="{{ path('admin_product_gallery_delete', { 'id_product': id_product, 'id_gallery': gallery.id_image_gallery }) }}"
+                    >
+                        {{ 'Delete'|trans({}, 'Modules.ProductGallery.Admin') }}
+                    </button>
+                </div>
+            </div>
+            <div class="product-images-container-gallery mb-4" id="toggle-gallery-{{ gallery.id_image_gallery }}">
+                <div class="product-images-gallery__edit">
+                    <select class="form-control select-available-gallery" id="field-gallery-id-{{ gallery.id_image_gallery }}">
+                        <option value="0">
+                            {{ 'Default'|trans({}, 'Modules.ProductGallery.Admin') }}
+                        </option>
+                        {% for available_gallery in available_galleries %}
+                            <option value="{{ available_gallery.id_image_gallery }}">
+                                {{ available_gallery.gallery_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <input
+                        type="hidden"
+                        id="hidden-gallery-id-{{ gallery.id_image_gallery }}"
+                        name="hidden-gallery-id"
+                        value=""
+                    />
+                    <button
+                        class="btn btn-primary save uppercase ml-3 product-image-update-gallery"
+                        id="button-gallery-id-{{ gallery.id_image_gallery }}"
+                        data-gallery-id="{{ gallery.id_image_gallery }}"
+                    >
+                        {{ 'Save!'|trans({}, 'Modules.ProductGallery.Admin') }}
+                    </button>
+                </div>
+                <div id="product-images-dropzone" class="panel dropzone ui-sortable col-md-12">
+                    {% if gallery.images is defined %}
+                        {% for image in gallery.images %}
+                            <div
+                                class="dz-preview dz-processing dz-image-preview dz-complete ui-sortable-handle product-gallery-image"
+                                id="product-image-updater-id-{{ image.id }}"
+                                data-id="{{ image.id }}"
+                                data-gallery-id="{{ gallery.id_image_gallery }}"
+                                update-image-gallery-url="{{ path('admin_product_image_gallery_update', {'id_image': image.id}) }}"
+                            >
+                                <div class="dz-image bg" style="background-image: url('{{ image.base_image_url }}-home_default.{{ image.format }}');"></div>
+                                {% if image.cover %}
+                                    <div class="iscover">{{ 'Cover'|trans({}, 'Modules.ProductGallery.Admin') }}</div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>

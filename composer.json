@@ -1,0 +1,27 @@
+{
+  "name": "mantas/productgallery",
+  "description": "PS Product gallery",
+  "authors": [
+    {
+      "name": "Mantas",
+      "email": "mpudziavis@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "ProductGallery\\": "src/"
+    },
+    "classmap": [],
+    "exclude-from-classmap": []
+  },
+  "config": {
+    "preferred-install": "dist",
+    "prepend-autoloader": false
+  },
+  "type": "prestashop-module",
+  "author": "Mantas",
+  "license": "MIT"
+}

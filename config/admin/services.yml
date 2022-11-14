@@ -1,0 +1,24 @@
+imports:
+    - { resource: ../common.yml }
+
+services:
+    _defaults:
+        public: true
+    product_gallery.controller.admin.product_gallery_controller:
+        public: true
+        class: ProductGallery\Controller\Admin\ProductGalleryController
+        arguments:
+            - "@product_gallery.data_provider.product_gallery_data_provider"
+            - "@product_gallery.factory.image_gallery_factory"
+            - "@product_gallery.remover.image_gallery_remover"
+            - "@prestashop.adapter.data_provider.product"
+            - "@doctrine.orm.entity_manager"
+
+    'PrestaShopBundle\Controller\Admin\ProductImageController':
+        class: ProductGallery\Controller\Admin\ProductImageController
+        arguments:
+            - "@product_gallery.data_provider.product_gallery_data_provider"
+            - "@product_gallery.updater.image_gallery_updater"
+
+    'prestashop.adapter.data_provider.product':
+        class: ProductGallery\DataProvider\ProductDataProvider

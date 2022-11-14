@@ -1,0 +1,35 @@
+admin_product_gallery_index:
+    path: /product-gallery/{id_product}
+    methods: [GET]
+    defaults:
+        _controller: 'product_gallery.controller.admin.product_gallery_controller:renderAction'
+        id_product: 0
+        _legacy_controller: 'ProductGalleryController'
+        _legacy_link: 'ProductGalleryController'
+
+admin_product_gallery_create:
+    path: /product-gallery/{id_product}
+    methods: [POST]
+    defaults:
+        _controller: 'product_gallery.controller.admin.product_gallery_controller:createGalleryAction'
+        id_product: 0
+        _legacy_controller: 'ProductGalleryController'
+        _legacy_link: 'ProductGalleryController'
+
+admin_product_gallery_delete:
+    path: /product-gallery/{id_product}/gallery/{id_gallery}
+    methods: [DELETE]
+    defaults:
+        _controller: 'product_gallery.controller.admin.product_gallery_controller:deleteGalleryAction'
+        id_product: 0
+        _legacy_controller: 'ProductGalleryController'
+        _legacy_link: 'ProductGalleryController'
+
+admin_product_image_gallery_update:
+    path: /product-gallery/{id_image}/gallery-update
+    methods: [POST]
+    defaults:
+        _controller: 'PrestaShopBundle\Controller\Admin\ProductImageController:updateImageGalleryAction'
+        id_image: 0
+        _legacy_controller: 'ProductImageController'
+        _legacy_link: 'ProductImageController'

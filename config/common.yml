@@ -1,0 +1,35 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    product_gallery.repository.product_gallery_repository:
+        class: ProductGallery\Repository\ProductGalleryRepository
+        arguments:
+            - "@doctrine.dbal.default_connection"
+            - "@prestashop.adapter.legacy.context"
+            - "%database_prefix%"
+
+    product_gallery.data_provider.product_gallery_data_provider:
+        public: true
+        class: ProductGallery\DataProvider\ProductGalleryDataProvider
+        arguments:
+            - "@product_gallery.repository.product_gallery_repository"
+
+    product_gallery.factory.image_gallery_factory:
+        public: true
+        class: ProductGallery\Factory\ImageGalleryFactory
+
+    product_gallery.remover.image_gallery_remover:
+        public: true
+        class: ProductGallery\Remover\ImageGalleryRemover
+        arguments:
+            - "@product_gallery.repository.product_gallery_repository"
+            - "@doctrine.orm.entity_manager"
+
+    product_gallery.updater.image_gallery_updater:
+        public: true
+        class: ProductGallery\Updater\ImageGalleryUpdater
+        arguments:
+            - "@product_gallery.repository.product_gallery_repository"
