@@ -8,9 +8,11 @@
         <div class="additional-product-galleries">
             <div class="additional-product-gallery__header">
                 {foreach from=$galleries item="gallery"}
-                    <a href="#{$gallery.id_image_gallery}" class="additional-product-gallery__header-title" data-additional-gallery="{$gallery.id_image_gallery}">
-                        {$gallery.gallery_name}
-                    </a>
+                    {if $gallery.images|@count}
+                        <a href="#{$gallery.id_image_gallery}" class="additional-product-gallery__header-title" data-additional-gallery="{$gallery.id_image_gallery}">
+                            {$gallery.gallery_name}
+                        </a>
+                    {/if}
                 {/foreach}
             </div>
             {foreach from=$galleries item="gallery"}
