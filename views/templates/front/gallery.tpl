@@ -2,7 +2,7 @@
     <div class="additional-product-galleries__wrapper">
         <div class="additional-product-galleries__header">
             <div class="additional-product-galleries__header-title">
-                {l s='Additional product galleries' d='Modules.Productgallery.Shop'} ({$galleries|@count})
+                {l s='Additional product galleries' d='Modules.Productgallery.Shop'} ({$total})
             </div>
         </div>
         <div class="additional-product-galleries">

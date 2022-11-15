@@ -182,11 +182,20 @@ class ProductGallery extends Module
                 $this->context->language
             );
 
+        $total = 0;
+
+        foreach ($productGalleries as $gallery) {
+            if (count($gallery['images'])) {
+                ++$total;
+            }
+        }
+
         $this->context->smarty->assign(
             [
                 'product' => $params['product'],
                 'galleries' => $productGalleries,
-            ]
+                'total' => $total,
+            ],
         );
 
         return $this->context
